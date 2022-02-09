@@ -12,11 +12,17 @@ const urlDatabase = {
 app.get("/", (req, res) => {
   res.send("<h1>Hello</h1>");
 });
+app.get("/urls/:shortURL", (req, res) => {
+  const templateVars = { url: urlDatabase[req.params.shortURL]}
+  res.render("url_show", templateVars);
+  // res.send(`<h4>${urlDatabase[req.params.shortURL]}</h4>`);
+})
 
 app.get("/urls", (req, res) => {
-  const templateVars = {urls: urlDatabase};
-  res.render("urls_index", templateVars);
+  const templateVars = { urls: urlDatabase} 
+  res.render("urls_list", templateVars);
 })
+
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}!`);
